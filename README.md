@@ -57,5 +57,40 @@ Follow these steps to run the AI-Powered Health Assistant locally:
 
 ### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/sriram.2109/ai-health-assistant.git
+git clone https://github.com/your-username/ai-health-assistant.git
 cd ai-health-assistant
+```
+2️⃣ Create a Virtual Environment
+```bash
+python -m venv venv
+```
+🔹 Activate the Virtual Environment
+```bash
+source venv/bin/activate
+```
+3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+4️⃣ Run the Application
+```bash
+python app.py
+```
+🔮 Future Enhancements
+🚀 We have exciting plans for future improvements, including:
+
+📱 Mobile App Integration – Bring the assistant to iOS and Android.
+
+🏥 Healthcare System Compatibility – Enable data sharing with hospitals (with user consent).
+
+📊 Advanced Symptom Tracking – Provide historical analysis and trend insights.
+
+🌍 Multi-Language Support – Expand accessibility worldwide.
+
+🩺 Integration with Wearables – Use smartwatch data for better insights.
+
+⭐ Show Your Support
+
+If you find this project useful, please consider giving it a ⭐ star on GitHub and sharing it with others!
+
+🚑 Stay healthy and take care!
