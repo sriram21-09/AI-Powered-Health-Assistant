@@ -57,7 +57,7 @@ Follow these steps to run the AI-Powered Health Assistant locally:
 
 ### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/your-username/ai-health-assistant.git
+git clone https://github.com/sriram21-09/ai-health-assistant.git
 cd ai-health-assistant
 ```
 2️⃣ Create a Virtual Environment
