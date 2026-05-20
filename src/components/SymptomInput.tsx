@@ -3,7 +3,7 @@ import { Mic, MicOff, Send, HelpCircle, Keyboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition';
 import { SymptomSuggestions } from './SymptomSuggestions';
-import { useToast } from './ToastProvider';
+import { useToast } from '../hooks/useToast';
 
 interface Props {
   onSubmit: (text: string, severity: string) => void;

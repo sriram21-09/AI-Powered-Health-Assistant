@@ -1,7 +1,8 @@
 import React from 'react';
 import { X, CheckCircle, AlertTriangle, AlertCircle, Info } from 'lucide-react';
-import { useToast } from './ToastProvider';
+import { useToast } from '../hooks/useToast';
 import { motion, AnimatePresence } from 'framer-motion';
+
 
 const ICON_MAP = {
   success: CheckCircle,

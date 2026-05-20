@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThumbsUp, ThumbsDown, AlertTriangle, ChevronDown, ChevronUp, Save, Copy, Check, Stethoscope, MessageCircle, Lightbulb } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Diagnosis } from '../types';
-import { useToast } from './ToastProvider';
+import { useToast } from '../hooks/useToast';
 
 interface Props {
   diagnosis: Diagnosis;
