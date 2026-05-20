@@ -1,227 +1,164 @@
 # 🏥 AI-Powered Health Assistant
-> **Enterprise-Grade Triage System & Symptom Analysis Platform**
+> **A premium, privacy-first symptom analysis and smart medical triage platform powered by Gemini 2.0 Flash.**
+
+<div align="center">
 
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Google Gemini AI](https://img.shields.io/badge/Google_Gemini_AI-2.0_Flash-F6820D?style=for-the-badge&logo=google-gemini&logoColor=white)](https://ai.google.dev/)
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-An elite, client-side, privacy-first **AI Health Assistant** that leverages **Google Gemini 2.0 Flash** for state-of-the-art medical triage and symptom analysis. Designed with a premium **glassmorphism dark-mode UI**, the platform features real-time Web Speech dictation, smart NLP preprocessing, persistent health history, and automatic emergency detection.
+[**✨ Live Demo / Dev Setup**](#-quick-start) | [**🧬 System Architecture**](#-system-architecture) | [**🔬 How It Works**](#-under-the-hood-nlp-preprocessing)
 
----
-
-## 🚨 IMPORTANT MEDICAL DISCLAIMER
-
-> [!WARNING]  
-> **This platform is for informational and educational purposes only.**  
-> It does **not** provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional or call emergency services (911) immediately in the event of severe symptoms. This project serves as a showcase of modern AI triage flow integration.
+</div>
 
 ---
 
-## 🌟 Premium Features Showcase
-
-### 🧠 Dual-Engine Hybrid Diagnostics
-The application implements a unique, fail-safe architecture. If the Google Gemini API key is missing or encounters a `429 Too Many Requests` (Quota Exceeded) or `500 Server Error`, the app transparently shifts to a **Local Rule-Based Preprocessor**. The user experience remains uninterrupted, showing an status badge: **"Using Offline Analysis"** vs **"Gemini AI Connected"**.
-
-### 🎤 Real-time Web Speech Transcription
-Integrates natively with the browser's **Speech Recognition API** (Chrome/Edge) to convert speech-to-text dynamically inside the input editor. Includes a pulsing red microphone indicator mirroring professional medical telemetry devices.
-
-### 🔒 Privacy-First Persistence
-No personal health details are stored on any backend database. All symptoms, diagnoses, timestamps, and feedback flags are saved directly within the browser's client-side `localStorage`.
-
-### 🚨 Automatic Emergency Triaging
-Matches user inputs against a high-priority emergency dictionary (e.g., chest pain, shortness of breath, slurred speech). Staging emergency symptoms halts normal outputs and renders an unmissable red warning banner requesting the user to contact local emergency response immediately.
+## 💡 What is AI Health Assistant?
+The **AI Health Assistant** is a professional, high-performance triage application designed to bridge the gap between complex symptoms and initial health guidance. It uses **Google Gemini 2.0 Flash** for medical reasoning, combined with browser-native **voice dictation** and **local storage history**, all packaged inside a gorgeous **glassmorphic dark-mode interface**.
 
 ---
 
-## 🗺️ Architectural Flowcharts
+## ⏱️ How It Works (In 3 Simple Steps)
 
-### 1. Unified System Dataflow
-The diagram below outlines how symptom descriptions transition from input validation through pre-processing, execute parallel AI or fallback matching, and persist in storage.
+```
+┌─────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐
+│   1. DESCRIBE SYMPTOMS  │ ────>│    2. INTELLIGENT AI    │ ────>│   3. TRIAGE & RESULTS   │
+│ Describe via text or    │      │ Preprocessed locally    │      │ Clear severity indicators│
+│ voice dictation.        │      │ analyzed by Gemini.     │      │ guidelines & history.   │
+└─────────────────────────┘      └─────────────────────────┘      └─────────────────────────┘
+```
+
+1. **Input:** You describe your symptoms (e.g., *"I have a throbbing headache but no fever"*). You can type it or click the **Microphone** to speak it aloud.
+2. **Analysis:** The system cleans your text (mapping terms like *"tummy ache"* to *"abdominal pain"*), filters exclusions, and queries the **Gemini AI Engine**.
+3. **Guidance:** You receive an interactive health report outlining possible conditions, confidence ratings, self-care guidelines, lifestyle advice, and an urgency score.
+
+---
+
+## ✨ Features Walkthrough
+
+### 🎙️ Web Speech Voice Dictation
+- Speak naturally to input symptoms.
+- Real-time text transcription updates directly in the text editor.
+- Beautiful pulsing red telemetry-style microphone icon during recording.
+
+### 🧠 Dual-Engine Hybrid Diagnostic (Zero-Fail Guarantee)
+- **Primary AI Engine:** Connects to **Gemini 2.0 Flash** to perform structured clinical matching.
+- **Offline Fallback Engine:** If your network goes down, or the API key hits rate limits, the app automatically transitions to a keyword-matching database. **The app never crashes.**
+
+### 🚨 Auto-Emergency Detection
+- Instantly screens inputs for emergency symptoms (e.g. chest pain, numbness, slurred speech).
+- Triggers a pulsing red fullscreen safety warning advising the user to call emergency services (911) immediately.
+
+### 🔒 Privacy-First Local History
+- All symptom logs, AI assessments, feedback ratings, and timestamps remain strictly on your local computer via `localStorage`.
+- Zero database storage ensures complete user privacy.
+
+---
+
+## 📊 System Architecture
+
+The following diagram illustrates how user input travels through validation, preprocessing, diagnosis engines, and storage.
 
 ```mermaid
-graph TD
-    A[User Input: Text or Speech Dictation] --> B[SymptomInput.tsx]
-    B -->|Submit| C[NLP Preprocessor: textProcessing.ts]
-    C -->|1. Negation Detection| D[Identify Excluded Symptoms]
-    C -->|2. Synonym Expansion| E[Map Vernacular to Clinical Terms]
-    C -->|3. Severity Check| F[Set Urgency Context]
-    D & E & F --> G[DiagnosisService.ts]
-    
-    G -->|Key Configured & Online| H[Gemini 2.0 Flash AI]
-    G -->|Key Missing or API 429/500| I[Local Rule-Based Matcher]
-    
-    H -->|Return JSON| J[Structured Diagnosis Object]
-    I -->|Locally Computed| J
-    
-    J --> K[App.tsx State Manager]
-    K -->|Check Urgency == emergency| L{Emergency Triggered?}
-    L -->|Yes| M[EmergencyBanner.tsx: Block UI & Demand 911 Call]
-    L -->|No| N[DiagnosisResult.tsx: Render Report & Accordions]
-    
-    N -->|User Clicks Save| O[HistoryService.ts]
-    O -->|Commit to client cache| P[(localStorage)]
-    N -->|Toast Alert| Q[Toast.tsx / ToastProvider.tsx]
-```
+flowchart TD
+    %% Styling Configuration
+    classDef ui fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef nlp fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef engine fill:#14532d,stroke:#4ade80,stroke-width:2px,color:#f8fafc;
+    classDef storage fill:#581c87,stroke:#c084fc,stroke-width:2px,color:#f8fafc;
 
-### 2. Diagnosis Service Logic Pipeline
-A detailed view of how [DiagnosisService.ts](file:///c:/Users/srira/Project/AI-Powered-Health-Assistant/src/services/DiagnosisService.ts) handles fallback scenarios.
+    %% Elements
+    Input[User Speech or Text Input]:::ui --> InputBox[SymptomInput.tsx Component]:::ui
+    InputBox --> Preprocessor[NLP Preprocessor: textProcessing.ts]:::nlp
+    
+    subgraph Preprocessing_Layer [NLP Preprocessing]
+        Preprocessor --> Negation[Negation Detection: Filter out excluded symptoms]:::nlp
+        Preprocessor --> Synonym[Synonym Expansion: Standardize slang to clinical terms]:::nlp
+        Preprocessor --> Severity[Severity Evaluator: Gauge initial urgency]:::nlp
+    end
 
-```
-                  [Start Triage Request]
-                            │
-               Is VITE_GEMINI_API_KEY set?
-               /                         \
-            (Yes)                        (No)
-             │                             │
-    [Attempt API call]                     │
-    [Model: gemini-2.0-flash]              │
-             │                             │
-       Did it succeed?                     │
-       /             \                     │
-    (Yes)            (No / 429 / 500)      │
-     │                       │             │
-[Parse AI JSON]       [Log error code]     │
-     │                       └──────┬──────┘
-     │                              ▼
-     │                 [Execute local preprocessor]
-     │                 [Match symptoms via keywords]
-     │                 [Compute relative confidence]
-     ▼                              ▼
- [Output Diagnosis]            [Output Local Match]
-[Badge: Gemini AI]            [Badge: Offline fallback]
+    Negation & Synonym & Severity --> Router[DiagnosisService.ts Routing Manager]:::engine
+    
+    subgraph Diagnostic_Engines [AI & Offline Matching]
+        Router -->|Key Available & Online| Gemini[Gemini 2.0 Flash AI]:::engine
+        Router -->|Key Missing or API Offline| LocalFallback[Local Keyword Database]:::engine
+    end
+
+    Gemini & LocalFallback --> Output[Structured Diagnosis Result]:::ui
+    
+    Output --> Render[DiagnosisResult.tsx Component]:::ui
+    Render -->|User Clicks 'Save'| HistoryService[HistoryService.ts Layer]:::storage
+    HistoryService --> Storage[(Client localStorage)]:::storage
+
+    %% Classes
+    class Input,InputBox,Output,Render ui;
+    class Preprocessor,Negation,Synonym,Severity nlp;
+    class Router,Gemini,LocalFallback engine;
+    class HistoryService,Storage storage;
 ```
 
 ---
 
-## 🛠️ Advanced Technology Stack
+## 💻 Quick Start
 
-| Component | Technology | Benefit |
-| :--- | :--- | :--- |
-| **Core Engine** | React 18.3 & TypeScript 5.0 | High performance, modular components, strict type-safety. |
-| **Compiler & Server**| Vite 5.4 | Sub-second Hot Module Replacement (HMR) and optimized build bundles. |
-| **Styling Framework**| Tailwind CSS 3.4 | Utility-first responsive spacing and custom animation utilities. |
-| **Animations** | Framer Motion 12.0 | Hardware-accelerated entry, collapse transitions, and toast alerts. |
-| **AI Integration** | `@google/generative-ai` | Secure connection to Gemini's multimodal endpoints. |
-| **Dictation Engine** | Web Speech API | Zero-latency, browser-native speech-to-text without extra downloads. |
-| **Persistence** | LocalStorage API | Complete confidentiality; data never leaves the client's device. |
-
----
-
-## 📂 Source Code Structure
-
-All modules follow a clean **Layered Concerns Architecture**:
-
-```
-AI-Powered-Health-Assistant/
-├── .env.example                    # Template for secure API environment configuration
-├── .gitignore                      # Configured to strictly block private keys (.env)
-├── index.html                      # SEO optimized metadata with Open Graph templates
-├── package.json                    # Metadata configuration and script definitions
-├── tailwind.config.js              # Extended tokens (animations, glassmorphic styling)
-└── src/
-    ├── App.tsx                     # Core state coordinator and layout structure
-    ├── types.ts                    # Application TypeScript schemas and interfaces
-    ├── index.css                   # Custom utility variables and global styles
-    ├── components/
-    │   ├── Header.tsx              # Pulse logo with Gemini connectivity status
-    │   ├── Footer.tsx              # Medical disclaimer footer and metadata indicators
-    │   ├── SymptomInput.tsx        # Multi-input form (text, voice, severity toggle)
-    │   ├── SymptomSuggestions.tsx  # Staggered pill buttons for common conditions
-    │   ├── DiagnosisResult.tsx     # Differential diagnosis report cards
-    │   ├── DisclaimerModal.tsx     # Dynamic health advisory gatekeeper modal
-    │   ├── HistoryPanel.tsx        # Local database sidebar with deletion actions
-    │   ├── LoadingAnalysis.tsx     # Animated telemetry scanner simulation
-    │   ├── EmergencyBanner.tsx     # Pulsing red lock screen for acute clinical cases
-    │   └── Toast.tsx               # Status toasts with progress timelines
-    ├── hooks/
-    │   ├── useSpeechRecognition.ts # Native Speech Recognition coordinator hook
-    │   └── useToast.ts             # Global notification hook
-    ├── services/
-    │   ├── DiagnosisService.ts     # Gemini API integrator and fallback engine
-    │   └── HistoryService.ts       # LocalStorage data persistence layer
-    └── utils/
-        └── textProcessing.ts       # NLP preprocessor (Negation & Synonym expander)
-```
-
----
-
-## ⚙️ Development Setup
-
-Follow these steps to run the application locally on your system.
+Follow these simple steps to run this project locally on your machine.
 
 ### Prerequisites
-- **Node.js** v18 or newer
-- **npm** (comes packaged with Node)
-- A modern web browser (Google Chrome or Microsoft Edge is required for voice dictation)
+* **Node.js** v18 or newer
+* **npm** (included with Node.js)
+* Google Chrome or Edge (required for Web Speech dictation)
 
-### 1. Clone the Codebase
-```bash
-git clone https://github.com/sriram21-09/AI-Powered-Health-Assistant.git
-cd AI-Powered-Health-Assistant
-```
+### 🚀 Get Up & Running
 
-### 2. Install Project Dependencies
-```bash
-npm install
-```
+1. **Clone the Repo:**
+   ```bash
+   git clone https://github.com/sriram21-09/AI-Powered-Health-Assistant.git
+   cd AI-Powered-Health-Assistant
+   ```
 
-### 3. Configure the Environment
-Create a `.env` file in the project's root folder:
-```bash
-# Copy template configuration
-cp .env.example .env
-```
-Open the `.env` file and insert your API key:
-```env
-VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
-```
-> [!TIP]
-> You can acquire a free, zero-cost API key from the [Google AI Studio Console](https://aistudio.google.com/apikey).
+2. **Install Packages:**
+   ```bash
+   npm install
+   ```
 
-### 4. Boot the Hot-Reloading Development Server
-```bash
-npm run dev
-```
-Navigate to the hosted port (usually `http://localhost:5173/`).
+3. **Set Up API Key:**
+   Create a file named `.env` in the root of the project:
+   ```bash
+   cp .env.example .env
+   ```
+   Open `.env` and paste your Gemini API key:
+   ```env
+   VITE_GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+   > 💡 *Get a free API key from the [Google AI Studio Console](https://aistudio.google.com/apikey).*
 
-### 5. Production Compilation
-Verify compiling builds for deployment with:
-```bash
-npm run build
-```
+4. **Start Dev Server:**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:5173/` in your web browser.
 
 ---
 
-## 🧪 Deep Dive: NLP Preprocessing Engine
-Before sending text queries to the Gemini API or the Fallback engine, [textProcessing.ts](file:///c:/Users/srira/Project/AI-Powered-Health-Assistant/src/utils/textProcessing.ts) processes inputs using these sub-systems:
+## 🔬 Under the Hood: NLP Preprocessing
 
-### A. Negation Processor
-Identifies qualifiers like "no", "not", "without", "never", "free of".
-- **Input:** *"I have severe chest pain but no fever."*
-- **Result:**
-  - Positive Symptom Match: `chest pain` (triggery for emergency checks)
-  - Excluded/Negated Symptom: `fever` (informs the diagnosis engine to ignore cold/flu differentials)
+The preprocessing module ([textProcessing.ts](file:///c:/Users/srira/Project/AI-Powered-Health-Assistant/src/utils/textProcessing.ts)) sanitizes data so the diagnostic systems yield high accuracy:
 
-### B. Synonym Expansion Dictionary
-Maps common colloquialisms to clinical nomenclature:
-```typescript
-const SYNONYM_MAP: Record<string, string> = {
-  'tummy ache': 'abdominal pain',
-  'belly ache': 'abdominal pain',
-  'sore head': 'headache',
-  'blocked nose': 'nasal congestion',
-  'hard to breathe': 'dyspnea',
-  'throwing up': 'vomiting'
-};
-```
+* **Negation Detection:** Distinguishes between symptoms a user has vs. symptoms they explicitly deny.
+  * *Example:* *"I have stomach pain but no fever."* → Standardizes to `stomach pain`, excludes `fever`.
+* **Synonym Expansion:** Translates colloquial descriptions into medical terminology:
+  * *"belly ache"* ➔ `abdominal pain`
+  * *"blocked nose"* ➔ `nasal congestion`
+  * *"throwing up"* ➔ `vomiting`
+  * *"hard to breathe"* ➔ `dyspnea`
 
 ---
 
 ## 📡 API Structured Response Contract
-The Gemini API model is constrained to return a strict, parsable JSON schema to avoid typical conversational outputs. Below is the precise schema handled by [DiagnosisService.ts](file:///c:/Users/srira/Project/AI-Powered-Health-Assistant/src/services/DiagnosisService.ts):
+
+The Gemini API model is constrained to return a strict, parsable JSON structure, avoiding messy markdown text wrappers:
 
 ```json
 {
@@ -231,18 +168,18 @@ The Gemini API model is constrained to return a strict, parsable JSON schema to 
     {
       "name": "Condition Name",
       "confidence": 0.85,
-      "description": "Clinical justification mapping matched inputs to literature."
+      "description": "Justification mapping user symptoms to medical conditions."
     }
   ],
   "recommendations": [
-    "Actionable self-care step (e.g. stay hydrated)",
-    "Clinical check (e.g. consult physician)"
+    "Actionable self-care guidelines",
+    "Clinical checks and indicators"
   ],
   "shouldSeeDoctor": true,
   "severity": "low | medium | high",
   "urgencyLevel": "routine | soon | urgent | emergency",
   "followUpQuestions": [
-    "Clinical check question to narrow down variables"
+    "Targeted diagnostic questions to narrow down symptoms"
   ],
   "lifestyleTips": [
     "General wellness guidelines"
@@ -252,11 +189,15 @@ The Gemini API model is constrained to return a strict, parsable JSON schema to 
 
 ---
 
-## 🏆 Project Accomplishments & Quality Metrics
+## 🏆 Rebuild Highlights
 
-1. **Accessibility Standards:** Compliant with WCAG 2.1 AA standards, utilizing semantic tags, structured headers, visual indicator keyboard outlines (`focus-visible`), and accessibility descriptors (`aria-label`).
-2. **Bundle Optimization:** Zero-bloat libraries. Relies strictly on browser native features for Voice-to-Text and Data Storage.
-3. **Advanced Micro-Interactions:** Custom toast alerts, loading skeleton placeholders, dynamic status rings, and collapsible panels to maximize UI feedback metrics.
+* **Accessibility:** Full WCAG 2.1 AA keyboard support, focus-visible indicators, and descriptive `aria-label` tags.
+* **Telemetry Design:** Sleek modern dark mode featuring CSS gradients, frosted glass layers, and animated glowing highlights.
+* **Minimal Dependency footprint:** Relies entirely on native browser features for speech transcription and local caching to maximize performance.
 
 ---
-🚑 **AI-Powered Health Assistant** — Developed to showcase advanced web design, modern API integration, and user-centric software architecture.
+
+## 🏥 Medical Disclaimer
+
+> [!CAUTION]
+> **This application is a student showcase/proof-of-concept project.** It does not substitute professional medical diagnosis, advice, or treatment. Always check with a qualified doctor for any serious health concerns. In case of emergency, contact local emergency response immediately.
