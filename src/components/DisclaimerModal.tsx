@@ -64,7 +64,7 @@ export function DisclaimerModal({ isOpen, onClose }: Props) {
                 <div>
                   <h3 className="font-semibold text-surface-200 text-sm">Emergency Situations</h3>
                   <p className="text-surface-400 text-xs mt-1 leading-relaxed">
-                    If you're experiencing severe symptoms or believe you have a medical emergency, call emergency services (911) immediately.
+                    If you're experiencing severe symptoms or believe you have a medical emergency, call emergency services (112 / 102) immediately.
                   </p>
                 </div>
               </div>

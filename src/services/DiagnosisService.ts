@@ -211,7 +211,7 @@ const FALLBACK_CONDITIONS: FallbackCondition[] = [
     minMatches: 2,
     confidence: 0.70,
     recommendations: [
-      "⚠️ SEEK IMMEDIATE MEDICAL ATTENTION — Call 911 or your local emergency number",
+      "⚠️ SEEK IMMEDIATE MEDICAL ATTENTION — Call 112 / 102 or your local emergency number",
       "Sit or lie down immediately to prevent falls",
       "Take aspirin if not allergic (chew one regular-strength tablet)",
       "Loosen any tight clothing",

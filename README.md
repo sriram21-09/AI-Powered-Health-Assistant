@@ -49,7 +49,7 @@ The **AI Health Assistant** is a professional, high-performance triage applicati
 
 ### 🚨 Auto-Emergency Detection
 - Instantly screens inputs for emergency symptoms (e.g. chest pain, numbness, slurred speech).
-- Triggers a pulsing red fullscreen safety warning advising the user to call emergency services (911) immediately.
+- Triggers a pulsing red fullscreen safety warning advising the user to call emergency services (112 / 102) immediately.
 
 ### 🔒 Privacy-First Local History
 - All symptom logs, AI assessments, feedback ratings, and timestamps remain strictly on your local computer via `localStorage`.

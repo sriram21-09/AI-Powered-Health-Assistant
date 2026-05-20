@@ -22,7 +22,7 @@ export function Footer() {
           </p>
           <p className="text-amber-400/80 font-medium">
             If you're experiencing a medical emergency, call your local emergency
-            services (911) immediately.
+            services (112 / 102) immediately.
           </p>
         </div>
       </div>
